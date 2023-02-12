@@ -6,15 +6,14 @@
 /*   By: samohamm <samohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 13:59:56 by samohamm          #+#    #+#             */
-/*   Updated: 2023/02/05 20:49:35 by samohamm         ###   ########.fr       */
+/*   Updated: 2023/02/12 20:02:57 by samohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "format.c"
 
-
-int ft_printf(const char * s, ...)
+int	ft_printf(const char *s, ...)
 {
 	va_list	args;
 	int		i;
@@ -27,7 +26,7 @@ int ft_printf(const char * s, ...)
 	{
 		if (s[i] == '%')
 		{
-			len += format(args,s[i+1]);
+			len += format(args, s[i + 1]);
 			i++;
 		}
 		else
@@ -45,13 +44,14 @@ int main()
 {
 	char c = 'S';
 	char *s= NULL;
-	int i = 12300005;
+	int i = -2147483648;
+	int u = 19;
 	int ret;
 	int reter;
 	
-	ret = printf("HELLO NEW PROJECT This Char = %c AND This String = %s AND This Intger %i AND This Digit %d \n", c, s,i,i);
+	ret = printf("HELLO NEW PROJECT This Char = %c AND This String = %s AND This Intger %i AND This Digit %d AND This Unsigned %u \n", c, s,i,i,u);
   	printf("printf returns %d bytes\n", ret);
 	
-	reter = ft_printf("HELLO NEW PROJECT This Char = %c AND This String = %s AND This Intger %i AND This Digit %d \n", c, s,i,i);
+	reter = ft_printf("HELLO NEW PROJECT This Char = %c AND This String = %s AND This Intger %i AND This Digit %d AND This Unsigned %u \n", c, s,i,i,u);
   	printf("ft_printf returns %d bytes\n", reter);
 }

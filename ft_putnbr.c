@@ -6,7 +6,7 @@
 /*   By: samohamm <samohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:50:12 by samohamm          #+#    #+#             */
-/*   Updated: 2023/02/05 20:48:43 by samohamm         ###   ########.fr       */
+/*   Updated: 2023/02/11 23:08:09 by samohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,25 @@ int	ft_putnbr(int n)
 	}
 	return (i);
 }
+
+
+int	ft_put_unsignd(unsigned int n)
+{
+	int				i;
+	char			*r;
+
+	i = lenn(n);
+	r = 0;
+	if (n / 10)
+	{
+		ft_put_unsignd(n / 10);
+		ft_put_unsignd(n % 10);
+	}
+	else
+	{
+		r = ft_itoa(n); 
+		write(1, r, 1);
+	}
+	return (i);
+}
+
