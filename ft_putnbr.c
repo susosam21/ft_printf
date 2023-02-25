@@ -6,7 +6,7 @@
 /*   By: samohamm <samohamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 16:50:12 by samohamm          #+#    #+#             */
-/*   Updated: 2023/02/11 23:08:09 by samohamm         ###   ########.fr       */
+/*   Updated: 2023/02/25 20:04:33 by samohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,80 +32,43 @@ static int	lenn(int n)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+int	ft_putnbr(int nb)
 {
-	char			*str;
-	unsigned int	nn;
 	size_t			i;
 
-	i = lenn(n);
-	nn = n;
-	str = malloc(sizeof(char) * (i) + 1);
-	if (!str)
-		return (NULL);
-	str[i] = '\0';
-	if (n == 0)
-		str[--i] = '0';
-	if (n < 0)
+	i = lenn(nb);
+	if (nb == -2147483648)
 	{
-		str[0] = '-';
-		nn = n * -1;
+		write(1, "-2147483648", 11);
+		return (11);
 	}
-	while (nn > 0)
+	else if (nb < 0)
 	{
-		str[--i] = (nn % 10) + '0';
-		nn = nn / 10;
+		ft_putchar('-');
+		nb *= -1;
+		ft_putnbr(nb);
 	}
-	return (str);
-}
-
-int	ft_putnbr(int n)
-{
-	int	i;
-	char	*r;
-
-	i = lenn(n);
-	if (n < 0)
+	else if (nb >= 10)
 	{
-		if (n == -2147483648)
-		{
-			write(1, "-2147483648", 11);
-			return (11);
-		}
-		write(1, "-", 1);
-		n = -n;
-	}
-	if (n / 10)
-	{
-		ft_putnbr(n / 10);
-		ft_putnbr(n % 10);
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
 	}
 	else
-	{
-		r = ft_itoa(n); 
-		write(1, r, 1);
-	}
+		ft_putchar(nb + '0');
 	return (i);
 }
-
 
 int	ft_put_unsignd(unsigned int n)
 {
-	int				i;
-	char			*r;
+	int	i;
 
-	i = lenn(n);
-	r = 0;
+	i = 0;
 	if (n / 10)
 	{
-		ft_put_unsignd(n / 10);
-		ft_put_unsignd(n % 10);
+		i += ft_put_unsignd(n / 10);
+		i += ft_put_unsignd(n % 10);
 	}
 	else
-	{
-		r = ft_itoa(n); 
-		write(1, r, 1);
-	}
+		i += ft_putnbr(n);
 	return (i);
 }
-
